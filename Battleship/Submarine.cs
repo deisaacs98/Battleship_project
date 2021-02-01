@@ -12,7 +12,7 @@ namespace Battleship_Project
         public Submarine()
         {
             Name = "Submarine";
-            size = 3;
+            size = new string[3];
         }
     }
 }

@@ -70,5 +70,17 @@ namespace Battleship_Project
                 }
             }
         }
+
+        public static void DisplayFleet(Player player)
+        {
+            foreach(Ship ship in player.fleet)
+            {
+                Console.WriteLine(ship.Name+"\t\t");
+                for(int i=0;i<ship.Size.Length;i++)
+                {
+                    Console.Write(ship.Size[i]);
+                }
+            }
+        }
     }
 }

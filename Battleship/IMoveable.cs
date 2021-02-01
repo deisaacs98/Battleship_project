@@ -6,12 +6,7 @@ using System.Threading.Tasks;
 
 namespace Battleship_Project
 {
-    class Aircraft_Carrier : Ship
+    interface IMoveable
     {
-        public Aircraft_Carrier()
-        {
-            Name = "Aircraft Carrier";
-            size = new string[5];
-        }
     }
 }

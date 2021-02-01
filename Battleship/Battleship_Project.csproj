@@ -49,6 +49,7 @@
     <Compile Include="CPU.cs" />
     <Compile Include="Destroyer.cs" />
     <Compile Include="Human.cs" />
+    <Compile Include="IMoveable.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />

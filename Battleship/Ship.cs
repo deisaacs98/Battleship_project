@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Battleship_Project
 {
-    public abstract class Ship
+    public abstract class Ship:IMoveable
     {
-        protected int size;
+        protected string[] size;
         public string Name;
 
-        public double Size
+        public string[] Size
         {
             get
             {
