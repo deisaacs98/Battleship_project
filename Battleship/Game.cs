@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace Battleship_Project
 {
-    class Game
+    public class Game
     {
+        public Player player1;
+        public Player player2;
+        
+
+        public Game()
+        {
+
+        }
+
+        
     }
 }

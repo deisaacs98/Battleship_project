@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Battleship_Project
 {
-    class Submarine
+    public class Submarine : Ship
     {
+        
+        public Submarine()
+        {
+            Name = "Submarine";
+            size = 3;
+        }
     }
 }

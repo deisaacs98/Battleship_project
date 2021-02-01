@@ -6,7 +6,23 @@ using System.Threading.Tasks;
 
 namespace Battleship_Project
 {
-    class Ship
+    public abstract class Ship
     {
+        protected int size;
+        public string Name;
+
+        public double Size
+        {
+            get
+            {
+                return size;
+            }
+        }
+
+        public Ship()
+        {
+
+        }
+        
     }
 }

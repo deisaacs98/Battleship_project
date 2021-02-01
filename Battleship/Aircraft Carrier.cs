@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Battleship_Project
 {
-    class Aircraft_Carrier
+    class Aircraft_Carrier : Ship
     {
+        public Aircraft_Carrier()
+        {
+            Name = "Aircraft Carrier";
+            size = 5;
+        }
     }
 }
