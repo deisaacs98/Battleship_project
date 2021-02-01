@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Battleship_Project
 {
-    public abstract class Ship:IMoveable
+    public abstract class Ship : IMoveable
     {
         protected string[] size;
         public string Name;
@@ -44,13 +45,13 @@ namespace Battleship_Project
             {
                 for (int i = 0; i < ship.Size.Length; i++)
                 {
-                    if (player.grid[xValue+i, yValue] != ".")
+                    if (grid[xValue+i, yValue] != ".")
                     {
                         break;
                     }
                     else
                     {
-                        player.grid[xValue+i, yValue] = ship.Size[i];
+                        grid[xValue+i, yValue] = ship.Size[i];
                     }
                 }
             }

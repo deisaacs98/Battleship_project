@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Battleship_Project
 {
     interface IMoveable
     {
-        void Move();
+        void Move(string[,] grid, Ship ship, int xValue, int yValue, bool vertical);
     }
 }

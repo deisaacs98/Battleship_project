@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,25 +20,26 @@ namespace Battleship_Project
             //whether the ship will be vertical or horizontal
             foreach (Ship ship in fleet)
             {
+                int xValue;
+                int yValue;
                 Random random = new Random();
                 bool vertical = false;
                 int angle = random.Next(0, 2);
                 if (angle == 0)
                 {
                     vertical = true;
-                    int xValue = random.Next(0, grid.GetLength(1));
-                    int yValue = random.Next(0, grid.GetLength(0) - ship.Size.Length);
+                    xValue = random.Next(0, grid.GetLength(0));
+                    yValue = random.Next(0, grid.GetLength(1) - ship.Size.Length);
                     ship.Move(grid, ship, xValue, yValue, vertical);
-
                 }
-                while (vertical)
+                else
                 {
-
+                    xValue = random.Next(0, grid.GetLength(0)-ship.Size.Length);
+                    yValue = random.Next(0, grid.GetLength(1));
+                    ship.Move(grid, ship, xValue, yValue, vertical);
                 }
             }
-
         }
-    }
 
-    
+    }  
 }
