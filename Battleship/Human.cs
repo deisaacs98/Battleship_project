@@ -8,5 +8,6 @@ namespace Battleship_Project
 {
     public class Human : Player
     {
+
     }
 }

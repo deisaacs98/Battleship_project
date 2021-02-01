@@ -17,6 +17,9 @@ namespace Battleship_Project
 
         }
 
-        
+        public void StartGame()
+        {
+
+        }
     }
 }
