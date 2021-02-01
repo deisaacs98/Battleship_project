@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Battleship
+namespace Battleship_Project
 {
     static class Menu
     {
@@ -57,6 +57,18 @@ namespace Battleship
 
             return validatedInput.Item2;
 
+        }
+
+        public static void DisplayGrid(Player player)
+        {
+            for(int i=0;i<player.grid.GetLength(0);i++)
+            {
+                Console.Write("\n");
+                for(int j=0;j<player.grid.GetLength(1);j++)
+                {
+                    Console.Write(player.grid[i, j]);
+                }
+            }
         }
     }
 }
