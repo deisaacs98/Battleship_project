@@ -8,5 +8,6 @@ namespace Battleship_Project
 {
     interface IMoveable
     {
+        void Move();
     }
 }

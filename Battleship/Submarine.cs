@@ -14,5 +14,6 @@ namespace Battleship_Project
             Name = "Submarine";
             size = new string[3];
         }
+
     }
 }
