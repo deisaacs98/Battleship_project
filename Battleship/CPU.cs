@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace Battleship_Project
 {
-    class Program
+    class CPU
     {
-        static void Main(string[] args)
-        {
-        }
     }
 }

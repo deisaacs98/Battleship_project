@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Battleship_Project
+namespace Battleship
 {
-    class Program
+    class Menu
     {
-        static void Main(string[] args)
-        {
-        }
     }
 }
