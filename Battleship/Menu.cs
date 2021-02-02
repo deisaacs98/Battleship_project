@@ -58,39 +58,60 @@ namespace Battleship_Project
             while (!validatedInput.Item1);
             return validatedInput.Item2;
         }
-
-        public static void DisplayGrid(Player player)
+        public static void PlaceShipPrompt(Ship ship)
         {
-            for(int i=0;i<player.grid.Height;i++)
+            Console.WriteLine("Place your "+ship);
+            Console.WriteLine("\n Use the arrow keys to move your ship");
+            Console.WriteLine("Use the spacebar to switch between vertical and horizontal.");
+        }
+        public static void DisplayGrid(Grid grid)
+        {
+            Console.WriteLine(" ABCDEFGHIJKLMNOPQRST");
+            for(int i=0;i<grid.Height+1;i++)
             {
-                Console.Write("\n");
-                for(int j=0;j<player.grid.Width;j++)
+                Console.Write((i+1)+"\n");
+                for(int j=0;j<grid.Width;j++)
                 {
-                    Console.Write(player.grid[i, j]);
+                    Console.Write(grid[i, j]);
                 }
             }
         }
+        //public static void DisplayFleet(Player player)
+        //{
+        //    foreach (Ship ship in player.fleet)
+        //    {
+        //        Console.WriteLine(ship.Name + "\t\t");
+        //        for (int i = 0; i < ship.Size.Length; i++)
+        //        {
+        //            Console.Write(ship.Size[i]);
+        //        }
+        //    }
+        //}
 
-        public static void DisplayFleet(Player player)
-        {
-            foreach(Ship ship in player.fleet)
-            {
-                Console.WriteLine(ship.Name+"\t\t");
-                for(int i=0;i<ship.Size.Length;i++)
-                {
-                    Console.Write(ship.Size[i]);
-                }
-            }
-        }
-
-        public static void PlaceShipHelp()
-        {
-            Console.WriteLine("Place Your Ships\n");
-            Console.WriteLine("Move ships around grid using arrow keys.");
-            Console.WriteLine("Press spacebar to switch between horizontal and vertical.");
-        }
 
 
         
+
+        public static int[] AttackPrompt()
+        {
+
+            Tuple<bool, int> validatedLetter;
+            do
+            {
+                Console.WriteLine("Enter the coordinates for your attack.");
+                Console.WriteLine("Letter: ");
+                string letter = Console.ReadLine();
+                validatedLetter = ValidateLetter(letter);
+            }
+            while (!validatedLetter.Item1);
+            Console.WriteLine("Number: ");
+            string number = Console.ReadLine();
+            
+        }
+        
+        public static Tuple<bool, int> ValidateLetter(string letter)
+        {
+            List<string> letters = 
+        }
     }
 }

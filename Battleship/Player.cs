@@ -12,6 +12,7 @@ namespace Battleship_Project
         public Fleet fleet;
         public Grid grid = new Grid();
 
+
         //The ships will start with a set number of O's
         //depending on the type of ship. Once the corresponding
         //spot is hit, the O will be changed into an X.
@@ -25,12 +26,12 @@ namespace Battleship_Project
 
         public virtual void PlaceShips()
         {
-            fleet.Prepare();
+
         }
 
-        public virtual void Attack()
+        public virtual int[] Attack()
         {
-
+            return null;
         }
     }
 }

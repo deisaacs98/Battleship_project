@@ -32,6 +32,7 @@ namespace Battleship_Project
 
         public void Move(Grid grid, Ship ship, int xValue, int yValue, bool vertical)
         {
+
             if (!vertical)
             {
                 for (int i = 0; i < ship.Size.Length; i++)

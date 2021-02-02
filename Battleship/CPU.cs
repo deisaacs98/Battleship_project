@@ -12,12 +12,16 @@ namespace Battleship_Project
         //Placing ships is likely going to be the hardest
         //part, so let's focus on the automated process
         //before moving on to validating user input.
+        public CPU()
+        {
 
+        }
         public override void PlaceShips()
         {
             //Unlike the "Human" method, the input can
             //be generated randomly. First, let's decide
             //whether the ship will be vertical or horizontal
+            fleet.Prepare();
             foreach (Ship ship in fleet)
             {
                 int xValue;

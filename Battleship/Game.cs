@@ -39,16 +39,30 @@ namespace Battleship_Project
             player1.PlaceShips();
             player2.PlaceShips();
             bool playGame = true;
+            int[] loc;
             while(playGame)
             {
-                player1.Attack();
-
-                player2.Attack();
+                loc=player1.Attack();
+                CheckIfHit(loc,player2);
+                loc=player2.Attack();
+                CheckIfHit(loc,player1);
             }
 
         }
+        public void CheckIfHit(int[] loc,Player player)
+        {
+            int xValue = loc[0];
+            int yValue = loc[1];
+            if(player.grid[xValue,yValue]=="O")
+            {
+                //HIT
+                
+            }
+        }
+        public void CheckScore()
+        {
 
-        public bool CheckScore
+        }
 
     }
 }
