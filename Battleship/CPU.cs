@@ -28,14 +28,14 @@ namespace Battleship_Project
                 if (angle == 0)
                 {
                     vertical = true;
-                    xValue = random.Next(0, grid.GetLength(0));
-                    yValue = random.Next(0, grid.GetLength(1) - ship.Size.Length);
+                    xValue = random.Next(0, grid.Height);
+                    yValue = random.Next(0, grid.Width - ship.Size.Length);
                     ship.Move(grid, ship, xValue, yValue, vertical);
                 }
                 else
                 {
-                    xValue = random.Next(0, grid.GetLength(0)-ship.Size.Length);
-                    yValue = random.Next(0, grid.GetLength(1));
+                    xValue = random.Next(0, grid.Height-ship.Size.Length);
+                    yValue = random.Next(0, grid.Width);
                     ship.Move(grid, ship, xValue, yValue, vertical);
                 }
             }

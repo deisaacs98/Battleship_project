@@ -61,10 +61,10 @@ namespace Battleship_Project
 
         public static void DisplayGrid(Player player)
         {
-            for(int i=0;i<player.grid.GetLength(0);i++)
+            for(int i=0;i<player.grid.Height;i++)
             {
                 Console.Write("\n");
-                for(int j=0;j<player.grid.GetLength(1);j++)
+                for(int j=0;j<player.grid.Width;j++)
                 {
                     Console.Write(player.grid[i, j]);
                 }

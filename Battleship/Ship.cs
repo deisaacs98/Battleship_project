@@ -11,12 +11,17 @@ namespace Battleship_Project
     {
         protected string[] size;
         public string Name;
+        public int health;
 
         public string[] Size
         {
             get
             {
                 return size;
+            }
+            set
+            {
+                size = value;
             }
         }
 
@@ -25,34 +30,20 @@ namespace Battleship_Project
 
         }
 
-        public string[,] Move(string[,] grid, Ship ship, int xValue, int yValue, bool vertical)
+        public void Move(Grid grid, Ship ship, int xValue, int yValue, bool vertical)
         {
-            if (vertical)
+            if (!vertical)
             {
                 for (int i = 0; i < ship.Size.Length; i++)
                 {
-                    if (grid[xValue, yValue + i] != ".")
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        grid[xValue, yValue + i] = ship.Size[i];
-                    }
+                    grid[xValue, yValue + i] = ship.Size[i];
                 }
             }
             else
             {
                 for (int i = 0; i < ship.Size.Length; i++)
                 {
-                    if (grid[xValue+i, yValue] != ".")
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        grid[xValue+i, yValue] = ship.Size[i];
-                    }
+                    grid[xValue+i, yValue] = ship.Size[i];
                 }
             }
             

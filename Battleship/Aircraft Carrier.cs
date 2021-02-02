@@ -13,6 +13,7 @@ namespace Battleship_Project
         {
             Name = "Aircraft Carrier";
             size = new string[5];
+            health = 5;
         }
     }
 }

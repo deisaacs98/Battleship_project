@@ -13,6 +13,7 @@ namespace Battleship_Project
         {
             Name = "Destroyer";
             size = new string[2];
+            health = 2;
         }
     }
 }

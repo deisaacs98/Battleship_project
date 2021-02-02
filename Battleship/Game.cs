@@ -36,8 +36,19 @@ namespace Battleship_Project
         public void Run()
         {
             StartGame();
+            player1.PlaceShips();
+            player2.PlaceShips();
+            bool playGame = true;
+            while(playGame)
+            {
+                player1.Attack();
+
+                player2.Attack();
+            }
 
         }
+
+        public bool CheckScore
 
     }
 }
