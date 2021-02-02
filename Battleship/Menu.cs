@@ -14,8 +14,11 @@ namespace Battleship_Project
             Console.BackgroundColor = ConsoleColor.Blue;
             Console.ForegroundColor = ConsoleColor.White;
             Console.Clear();
-
+            Console.WriteLine("BATTLESHIP");
+            Console.WriteLine("\n\n\nPress Enter to Continue");
+            Console.ReadLine();
         }
+
         public static void DisplayError(string error)
         {
             Console.WriteLine(error);
@@ -37,17 +40,15 @@ namespace Battleship_Project
                 DisplayError("Invalid input");
                 return Tuple.Create(false, 0);
             }
-
         }
-
-
-
 
         public static int HowManyPlayers()
         {
             Tuple<bool, int> validatedInput;
             do
             {
+                Console.Clear();
+                Console.WriteLine("How many players?");
                 Console.WriteLine("1 Player");
                 Console.WriteLine("2 Player");
                 int input;
@@ -55,9 +56,7 @@ namespace Battleship_Project
                 validatedInput = ValidateNumberOfPlayers(input);
             }
             while (!validatedInput.Item1);
-
             return validatedInput.Item2;
-
         }
 
         public static void DisplayGrid(Player player)
@@ -82,6 +81,13 @@ namespace Battleship_Project
                     Console.Write(ship.Size[i]);
                 }
             }
+        }
+
+        public static void PlaceShipHelp()
+        {
+            Console.WriteLine("Place Your Ships\n");
+            Console.WriteLine("Move ships around grid using arrow keys.");
+            Console.WriteLine("Press spacebar to switch between horizontal and vertical.");
         }
 
 

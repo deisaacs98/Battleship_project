@@ -48,6 +48,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="CPU.cs" />
     <Compile Include="Destroyer.cs" />
+    <Compile Include="Grid.cs" />
     <Compile Include="Human.cs" />
     <Compile Include="IMoveable.cs" />
     <Compile Include="Menu.cs" />

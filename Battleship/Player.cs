@@ -44,5 +44,10 @@ namespace Battleship_Project
         {
 
         }
+
+        public virtual void Attack()
+        {
+
+        }
     }
 }

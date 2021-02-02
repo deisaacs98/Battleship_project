@@ -25,7 +25,7 @@ namespace Battleship_Project
 
         }
 
-        public void Move(string[,] grid, Ship ship, int xValue, int yValue, bool vertical)
+        public string[,] Move(string[,] grid, Ship ship, int xValue, int yValue, bool vertical)
         {
             if (vertical)
             {

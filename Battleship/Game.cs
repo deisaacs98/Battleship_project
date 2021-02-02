@@ -20,7 +20,24 @@ namespace Battleship_Project
 
         public void StartGame()
         {
+            Menu.Title();
+            int players=Menu.HowManyPlayers();
+            player1 = new Human();
+            if (players == 1)
+            {
+                player2 = new CPU();
+            }
+            else
+            {
+                player2 = new Human();
+            }
+        }
+
+        public void Run()
+        {
+            StartGame();
 
         }
+
     }
 }
