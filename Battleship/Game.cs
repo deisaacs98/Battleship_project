@@ -31,6 +31,8 @@ namespace Battleship_Project
             {
                 player2 = new Human();
             }
+            player1.grid.Create();
+            player2.grid.Create();
         }
 
         public void Run()
@@ -43,20 +45,25 @@ namespace Battleship_Project
             while(playGame)
             {
                 loc=player1.Attack();
-                CheckIfHit(loc,player2);
+                CheckIfHit(loc,player2, player1);
                 loc=player2.Attack();
-                CheckIfHit(loc,player1);
+                CheckIfHit(loc,player1, player2);
             }
 
         }
-        public void CheckIfHit(int[] loc,Player player)
+        public void CheckIfHit(int[] loc,Player player1, Player player2)
         {
             int xValue = loc[0];
             int yValue = loc[1];
-            if(player.grid[xValue,yValue]=="O")
+            if(player1.grid[xValue,yValue]=="O")
             {
                 //HIT
-                
+                player2.grid[xValue, yValue] = "X";
+                player1.grid[xValue, yValue] = "X";  
+            }
+            else
+            {
+                player2.grid[xValue, yValue] = "O";
             }
         }
         public void CheckScore()

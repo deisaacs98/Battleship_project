@@ -82,6 +82,7 @@ namespace Battleship_Project
                 validatedPlacement = ValidatePlacement(number1, number2, grid, vertical, ship);
             }
             while (!validatedPlacement.Item1);
+            ship.Move(grid, ship, validatedPlacement.Item2[0], validatedPlacement.Item2[0], vertical);
         }
             
         
@@ -103,15 +104,16 @@ namespace Battleship_Project
         }
         public static void DisplayGrid(Grid grid)
         {
-            Console.WriteLine("  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20");
-            for(int i=0;i<grid.Height+1;i++)
+            Console.WriteLine("   1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20");
+            for(int i=0;i<grid.Height;i++)
             {
                 string yValue = Convert.ToString(i+1);
-                Console.WriteLine(yValue.PadRight(3));
+                Console.Write(yValue.PadRight(3));
                 for(int j=0;j<grid.Width;j++)
                 {
-                    Console.Write(grid[i, j]);
+                    Console.Write(grid[i, j]+"  ");
                 }
+                Console.Write("\n");
             }
         }
         //public static void DisplayFleet(Player player)
@@ -143,9 +145,11 @@ namespace Battleship_Project
                 Console.WriteLine("Enter the Y coordinate for your attack:");
                 int number2;
                 Int32.TryParse(Console.ReadLine(), out number2);
-                validatedAttack = ValidateAttack(number1, number2,grid,guessGrid);
+                validatedAttack = ValidateAttack(number1, number2,guessGrid);
             }
-            while (!validatedAttack.Item1); 
+            while (!validatedAttack.Item1);
+            return validatedAttack.Item2;
+
         }
 
         public static Tuple<bool, int[]> ValidatePlacement(int xValue, int yValue, Grid grid, bool vertical, Ship ship)
@@ -179,10 +183,10 @@ namespace Battleship_Project
             }
         }
 
-        public static Tuple<bool, int[]> ValidateAttack(int xValue, int yValue, Grid grid, Grid guessGrid)
+        public static Tuple<bool, int[]> ValidateAttack(int xValue, int yValue, Grid grid)
         {
             int[] loc = new int[2];
-            if (grid[xValue, yValue] == "O")
+            if (grid[xValue, yValue] == ".")
             {
 
                 loc[0] = xValue;

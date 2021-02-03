@@ -16,7 +16,18 @@ namespace Battleship_Project
         {
             grid = new string[height, width];
         }
-
+        
+        
+        public void Create()
+        {
+            for (int i = 0;i<Height;i++)
+            {
+                for(int j=0;j<Width;j++)
+                {
+                    grid[i, j] = ".";
+                }
+            }
+        }
         public string this[int xValue, int yValue]
         {
             get

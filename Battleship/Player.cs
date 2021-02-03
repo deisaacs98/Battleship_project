@@ -9,7 +9,7 @@ namespace Battleship_Project
 {
     public abstract class Player
     {
-        public Fleet fleet;
+        public Fleet fleet=new Fleet();
         public Grid grid = new Grid();
 
 
