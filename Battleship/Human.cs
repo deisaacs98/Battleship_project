@@ -20,36 +20,15 @@ namespace Battleship_Project
             fleet.Prepare();
             foreach (Ship ship in fleet)
             {
-                int xValue=0;
-                int yValue=0;
-                Menu.PlaceShipPrompt(ship);
-                Menu.DisplayGrid(grid);
-                bool vertical = false;
-                if (Console.ReadKey().Key == ConsoleKey.Spacebar)
-                {
-                    vertical = !vertical;
-                }
-
-                if (vertical)
-                {
-
-
-                    ship.Move(grid, ship, xValue, yValue, vertical);
-                }
-                else
-                {
-
-                    ship.Move(grid, ship, xValue, yValue, vertical);
-                }
+                Menu.PlaceShipPrompt(ship, grid);
             }
         }
         public override int[] Attack()
         {
             //Menu.DisplayFleet(this);
-            Menu.DisplayGrid(guessGrid);
-            Menu.DisplayGrid(grid);
+
             int[] loc;
-            loc=Menu.AttackPrompt();
+            loc=Menu.AttackPrompt(grid, guessGrid);
             return loc;
         }
 
