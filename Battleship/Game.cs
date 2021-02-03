@@ -11,6 +11,7 @@ namespace Battleship_Project
     {
         public Player player1;
         public Player player2;
+
         
 
         public Game()
@@ -20,6 +21,7 @@ namespace Battleship_Project
 
         public void StartGame()
         {
+
             Menu.Title();
             int players=Menu.HowManyPlayers();
             player1 = new Human();
@@ -48,8 +50,10 @@ namespace Battleship_Project
             {
                 loc=player1.Attack();
                 CheckIfHit(loc,player2, player1);
+                playGame = CheckScore(player2);
                 loc=player2.Attack();
                 CheckIfHit(loc,player1, player2);
+                playGame = CheckScore(player1);
             }
 
         }
@@ -63,6 +67,8 @@ namespace Battleship_Project
                 player2.guessGrid[xValue-1, yValue-1] = "X";
                 player1.grid[xValue-1, yValue-1] = "X";
                 Console.WriteLine("You hit a ship!");
+                player2.hits++;
+                
             }
             else if(player1.grid[xValue-1,yValue-1]==".")
             {
@@ -76,9 +82,23 @@ namespace Battleship_Project
             Console.WriteLine("Press Enter to end your turn");
             Console.ReadLine();
         }
-        public void CheckScore()
+        public bool CheckScore(Player player)
         {
-
+            int totalSize=0;
+            foreach(Ship ship in player.fleet)
+            {
+                totalSize += ship.Size.Length;
+            }
+            if(player.hits>=totalSize)
+            {
+                Console.WriteLine(player+" has won the game!");
+                Console.ReadLine();
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
     }

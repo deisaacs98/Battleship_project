@@ -12,6 +12,7 @@ namespace Battleship_Project
         //Placing ships is likely going to be the hardest
         //part, so let's focus on the automated process
         //before moving on to validating user input.
+        
         public CPU()
         {
 
@@ -43,6 +44,21 @@ namespace Battleship_Project
                     ship.Move(grid, ship, xValue, yValue, vertical);
                 }
             }
+        }
+
+        public override int[] Attack()
+        {
+            Tuple<bool, int[]> validatedAttack;
+            do
+            {
+                int[] loc = new int[2];
+                Random random = new Random();
+                int xValue = random.Next(0, grid.Height);
+                int yValue = random.Next(0, grid.Width);
+                validatedAttack = Menu.ValidateAttack(xValue, yValue, guessGrid);
+            }
+            while (!validatedAttack.Item1);
+            return validatedAttack.Item2;
         }
 
     }  

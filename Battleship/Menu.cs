@@ -22,6 +22,8 @@ namespace Battleship_Project
         public static void DisplayError(string error)
         {
             Console.WriteLine(error);
+            Console.ReadLine();
+            Console.Clear();
 
         }
 
@@ -149,7 +151,7 @@ namespace Battleship_Project
                 Console.WriteLine("Enter the Y coordinate for your attack:");
                 int number2;
                 Int32.TryParse(Console.ReadLine(), out number2);
-                validatedAttack = ValidateAttack(number1, number2,guessGrid);
+                validatedAttack = ValidateAttack(number2, number1,guessGrid);
             }
             while (!validatedAttack.Item1);
             return validatedAttack.Item2;
