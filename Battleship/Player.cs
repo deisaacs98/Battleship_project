@@ -11,6 +11,7 @@ namespace Battleship_Project
     {
         public Fleet fleet=new Fleet();
         public Grid grid = new Grid();
+        public Grid guessGrid = new Grid();
 
 
         //The ships will start with a set number of O's

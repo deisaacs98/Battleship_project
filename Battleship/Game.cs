@@ -32,7 +32,9 @@ namespace Battleship_Project
                 player2 = new Human();
             }
             player1.grid.Create();
+            player1.guessGrid.Create();
             player2.grid.Create();
+            player2.guessGrid.Create();
         }
 
         public void Run()
@@ -55,16 +57,24 @@ namespace Battleship_Project
         {
             int xValue = loc[0];
             int yValue = loc[1];
-            if(player1.grid[xValue,yValue]=="O")
+            if(player1.grid[xValue-1,yValue-1]=="O")
             {
                 //HIT
-                player2.grid[xValue, yValue] = "X";
-                player1.grid[xValue, yValue] = "X";  
+                player2.guessGrid[xValue-1, yValue-1] = "X";
+                player1.grid[xValue-1, yValue-1] = "X";
+                Console.WriteLine("You hit a ship!");
+            }
+            else if(player1.grid[xValue-1,yValue-1]==".")
+            {
+                player2.guessGrid[xValue-1, yValue-1] = "O";
+                Console.WriteLine("You missed.");
             }
             else
             {
-                player2.grid[xValue, yValue] = "O";
+                Console.WriteLine("You already hit this spot!");
             }
+            Console.WriteLine("Press Enter to end your turn");
+            Console.ReadLine();
         }
         public void CheckScore()
         {

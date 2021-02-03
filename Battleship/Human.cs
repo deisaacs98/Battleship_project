@@ -9,7 +9,6 @@ namespace Battleship_Project
 {
     public class Human : Player
     {
-        public Grid guessGrid = new Grid();
         public Human()
         {
 

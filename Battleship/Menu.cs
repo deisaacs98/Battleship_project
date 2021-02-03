@@ -79,10 +79,10 @@ namespace Battleship_Project
                 Console.WriteLine("Enter the Y coordinate:");
                 int number2;
                 Int32.TryParse(Console.ReadLine(), out number2);
-                validatedPlacement = ValidatePlacement(number1, number2, grid, vertical, ship);
+                validatedPlacement = ValidatePlacement(number2-1, number1-1, grid, vertical, ship);
             }
             while (!validatedPlacement.Item1);
-            ship.Move(grid, ship, validatedPlacement.Item2[0], validatedPlacement.Item2[0], vertical);
+            ship.Move(grid, ship, validatedPlacement.Item2[0], validatedPlacement.Item2[1], vertical);
         }
             
         
@@ -134,11 +134,15 @@ namespace Battleship_Project
 
         public static int[] AttackPrompt(Grid grid, Grid guessGrid)
         {
-            Menu.DisplayGrid(guessGrid);
-            Menu.DisplayGrid(grid);
+            
             Tuple<bool, int[]> validatedAttack;
             do
             {
+                Console.Clear();
+                Console.WriteLine("Opponent's grid\n");
+                Menu.DisplayGrid(guessGrid);
+                Console.WriteLine("\nYour grid\n");
+                Menu.DisplayGrid(grid);
                 Console.WriteLine("Enter the X coordinate for your attack:");
                 int number1; 
                 Int32.TryParse(Console.ReadLine(),out number1);
@@ -186,9 +190,8 @@ namespace Battleship_Project
         public static Tuple<bool, int[]> ValidateAttack(int xValue, int yValue, Grid grid)
         {
             int[] loc = new int[2];
-            if (grid[xValue, yValue] == ".")
+            if (xValue<=grid.Height&&yValue<=grid.Width)
             {
-
                 loc[0] = xValue;
                 loc[1] = yValue;
                 return Tuple.Create(true, loc);
