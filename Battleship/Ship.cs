@@ -30,21 +30,21 @@ namespace Battleship_Project
 
         }
 
-        public void Move(Grid grid, Ship ship, int xValue, int yValue, bool vertical)
+        public void Move(Grid grid, int xValue, int yValue, bool vertical)
         {
 
             if (!vertical)
             {
-                for (int i = 0; i < ship.Size.Length; i++)
+                for (int i = 0; i < Size.Length; i++)
                 {
-                    grid[xValue, yValue + i] = ship.Size[i];
+                    grid[xValue, yValue + i] = Size[i];
                 }
             }
             else
             {
-                for (int i = 0; i < ship.Size.Length; i++)
+                for (int i = 0; i < Size.Length; i++)
                 {
-                    grid[xValue+i, yValue] = ship.Size[i];
+                    grid[xValue+i, yValue] = Size[i];
                 }
             }
             

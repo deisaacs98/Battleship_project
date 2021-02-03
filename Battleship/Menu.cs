@@ -84,7 +84,7 @@ namespace Battleship_Project
                 validatedPlacement = ValidatePlacement(number2-1, number1-1, grid, vertical, ship);
             }
             while (!validatedPlacement.Item1);
-            ship.Move(grid, ship, validatedPlacement.Item2[0], validatedPlacement.Item2[1], vertical);
+            ship.Move(grid, validatedPlacement.Item2[0], validatedPlacement.Item2[1], vertical);
         }
             
         

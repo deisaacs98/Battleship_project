@@ -5,7 +5,7 @@ using Battleship_Project;
 namespace BattleshipUnitTests
 {
     [TestClass]
-    public class AttackMethodTest
+    public class ValidatePlacementMethodTest
     {
         [TestMethod]
         public void TestMethod1()

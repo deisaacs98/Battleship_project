@@ -35,13 +35,13 @@ namespace Battleship_Project
                     vertical = true;
                     xValue = random.Next(0, grid.Height);
                     yValue = random.Next(0, grid.Width - ship.Size.Length);
-                    ship.Move(grid, ship, xValue, yValue, vertical);
+                    ship.Move(grid, xValue, yValue, vertical);
                 }
                 else
                 {
                     xValue = random.Next(0, grid.Height-ship.Size.Length);
                     yValue = random.Next(0, grid.Width);
-                    ship.Move(grid, ship, xValue, yValue, vertical);
+                    ship.Move(grid, xValue, yValue, vertical);
                 }
             }
         }

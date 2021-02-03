@@ -10,11 +10,23 @@ namespace Battleship_Project
     
     public class Fleet : IEnumerable
     {
-        Ship[] ships;
+        Ship[] ships=new Ship[4];
 
         public Fleet()
         {
-            this.ships = new Ship[4];
+            
+        }
+
+        public Ship this[int index]
+        {
+            get
+            {
+                return ships[index];
+            }
+            set
+            {
+                ships[index] = value;
+            }
         }
 
         public void AddShips()

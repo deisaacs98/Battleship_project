@@ -9,6 +9,6 @@ namespace Battleship_Project
 {
     interface IMoveable
     {
-        void Move(Grid grid, Ship ship, int xValue, int yValue, bool vertical);
+        void Move(Grid grid, int xValue, int yValue, bool vertical);
     }
 }

@@ -49,10 +49,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AttackMethodTest.cs" />
-    <Compile Include="DisplayResultMethodTest.cs" />
-    <Compile Include="DisplayWinnerMethodTest.cs" />
-    <Compile Include="RunGameMethodTest.cs" />
+    <Compile Include="CheckScoreMethodTest.cs" />
+    <Compile Include="CheckIfHitMethodTest.cs" />
+    <Compile Include="ValidatePlacementMethodTest.cs" />
+    <Compile Include="ValidateAttackMethodTest.cs" />
     <Compile Include="MoveShipMethodTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
