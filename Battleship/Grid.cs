@@ -44,16 +44,13 @@ namespace Battleship_Project
         {
             get
             { return width; }
-            set
-            { width = value; }
         }
         public int Height
         {
             get
             { return height; }
-            set
-            { height = value; }
         }
+
 
     }
 }

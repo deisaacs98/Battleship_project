@@ -11,6 +11,7 @@ namespace Battleship_Project
     {
         public Player player1;
         public Player player2;
+        public bool onePlayer=false;
 
         public Game()
         {
@@ -25,6 +26,7 @@ namespace Battleship_Project
             player1 = new Human();
             if (players == 1)
             {
+                onePlayer = true;
                 player2 = new CPU();
             }
             else
@@ -47,38 +49,59 @@ namespace Battleship_Project
             while(playGame)
             {
                 loc=player1.Attack();
-                CheckIfHit(loc,player2, player1);
+                CheckIfHit(loc,player2, player1,true);
                 playGame = CheckScore(player2, player1, "Player 1");
                 loc=player2.Attack();
-                CheckIfHit(loc,player1, player2);
-                playGame = CheckScore(player1, player2, "Player 2");
+                if (onePlayer)
+                {
+                    CheckIfHit(loc, player1, player2, false);
+                    playGame = CheckScore(player1, player2, "Player 2");
+                }
+                else
+                {
+                    CheckIfHit(loc, player1, player2, true);
+                    playGame = CheckScore(player1, player2, "Player 2");
+                }
             }
 
         }
-        public void CheckIfHit(int[] loc,Player player1, Player player2)
+        public void CheckIfHit(int[] loc,Player player1, Player player2, bool isHuman)
         {
             int xValue = loc[0];
             int yValue = loc[1];
             if(player1.grid[xValue-1,yValue-1]=="O")
             {
-                //HIT
                 player2.guessGrid[xValue-1, yValue-1] = "X";
                 player1.grid[xValue-1, yValue-1] = "X";
-                Menu.DisplayHit(player2);
-                player2.hits++;
-                
+                if(isHuman)
+                {
+                    Menu.DisplayHit(player2);
+                    Console.WriteLine("\nPress Enter to end your turn");
+                    Console.ReadLine();
+                }
+                player2.hits++;   
             }
             else if(player1.grid[xValue-1,yValue-1]==".")
             {
                 player2.guessGrid[xValue-1, yValue-1] = "O";
-                Menu.DisplayMiss(player2);
+                player1.grid[xValue - 1, yValue - 1] = "O";
+                if (isHuman)
+                {
+                    Menu.DisplayMiss(player2);
+                    Console.WriteLine("\nPress Enter to end your turn");
+                    Console.ReadLine();
+                }
             }
             else
             {
-                Menu.DisplayHitSameSpot(player2);
+                if (isHuman)
+                {
+                    Menu.DisplayHitSameSpot(player2);
+                    Console.WriteLine("\nPress Enter to end your turn");
+                    Console.ReadLine();
+                }        
             }
-            Console.WriteLine("\nPress Enter to end your turn");
-            Console.ReadLine();
+
         }
         public bool CheckScore(Player player1, Player player2, string winnerName)
         {

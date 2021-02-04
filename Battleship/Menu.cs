@@ -11,11 +11,17 @@ namespace Battleship_Project
     {
         public static void Title()
         {
+            Console.SetWindowSize(120, 63);
             Console.BackgroundColor = ConsoleColor.Blue;
             Console.ForegroundColor = ConsoleColor.White;
             Console.Clear();
-            Console.WriteLine("BATTLESHIP");
-            Console.WriteLine("\n\n\nPress Enter to Continue");
+            Console.WriteLine("\n\t\t   ______  __  _____  _____  _     ____    _____  _  _  ____ ");
+            Console.Write("\n\t\t  |  /  /|/  ||_   _||_   _|| |   |  _|   / ___/ | || || -  |");
+            Console.Write("\n\t\t  |   _/_/ / |  | |    | |  | |   |   |  / /_| |_| || ||  _/ ");
+            Console.Write("\n\t\t  |     /    |  | |    | |  | |   |  _| /__  /  _  || || | ");
+            Console.Write("\n\t\t  |  / /  /| |  | |    | |  | |__ |   |___/ /| | | || || |");
+            Console.Write("\n\t\t  |___/__/ |_|  |_|    |_|  |____||___|____/ |_| |_||_||_|");
+            Console.WriteLine("\n\n\n\t\t\t\tPress Enter to Continue");
             Console.ReadLine();
         }
 
@@ -105,11 +111,11 @@ namespace Battleship_Project
         }
         public static void DisplayGrid(Grid grid)
         {
-            Console.WriteLine("   1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20");
+            Console.WriteLine("\t\t\t   1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20");
             for(int i=0;i<grid.Height;i++)
             {
                 string yValue = Convert.ToString(i+1);
-                Console.Write(yValue.PadRight(3));
+                Console.Write(\t\t\tyValue.PadRight(3));
                 for(int j=0;j<grid.Width;j++)
                 {
                     Console.Write(grid[i, j]+"  ");
@@ -125,14 +131,14 @@ namespace Battleship_Project
             do
             {
                 Console.Clear();
-                Console.WriteLine("Opponent's grid\n");
+                Console.WriteLine("\t\t\t\tOpponent's grid\n");
                 Menu.DisplayGrid(guessGrid);
-                Console.WriteLine("\nYour grid\n");
+                Console.WriteLine("\n\t\t\t\tYour grid\n");
                 Menu.DisplayGrid(grid);
-                Console.WriteLine("Enter the X coordinate for your attack:");
+                Console.WriteLine("\t\t\t\tEnter the X coordinate for your attack:");
                 int number1; 
                 Int32.TryParse(Console.ReadLine(),out number1);
-                Console.WriteLine("Enter the Y coordinate for your attack:");
+                Console.WriteLine("\t\t\t\tEnter the Y coordinate for your attack:");
                 int number2;
                 Int32.TryParse(Console.ReadLine(), out number2);
                 validatedAttack = ValidateAttack(number2, number1,guessGrid);
@@ -186,7 +192,7 @@ namespace Battleship_Project
             {
                 loc[0] = 0;
                 loc[1] = 0;
-                DisplayError("Invalid input");
+                DisplayError("\t\t\t\tInvalid input");
                 return Tuple.Create(false, loc);
             }
         }
@@ -194,40 +200,40 @@ namespace Battleship_Project
         public static void DisplayHit(Player player)
         {
             Console.Clear();
-            Console.WriteLine("You hit a ship!");
-            Console.WriteLine("Opponent's grid\n");
+            Console.WriteLine("\t\t\t\tYou hit a ship!");
+            Console.WriteLine("\t\t\t\tOpponent's grid\n");
             Menu.DisplayGrid(player.guessGrid);
-            Console.WriteLine("\nYour grid\n");
+            Console.WriteLine("\n\t\t\t\tYour grid\n");
             Menu.DisplayGrid(player.grid);
 
         }
         public static void DisplayMiss(Player player)
         {
             Console.Clear();
-            Console.WriteLine("You missed!");
-            Console.WriteLine("Opponent's grid\n");
+            Console.WriteLine("\t\t\t\tYou missed!");
+            Console.WriteLine("\t\t\t\tOpponent's grid\n");
             Menu.DisplayGrid(player.guessGrid);
-            Console.WriteLine("\nYour grid\n");
+            Console.WriteLine("\n\t\t\t\tYour grid\n");
             Menu.DisplayGrid(player.grid);
 
         }
         public static void DisplayHitSameSpot(Player player)
         {
             Console.Clear();
-            Console.WriteLine("You alrady hit this spot!");
-            Console.WriteLine("Opponent's grid\n");
+            Console.WriteLine("\t\t\t\tYou alrady hit this spot!");
+            Console.WriteLine("\t\t\t\tOpponent's grid\n");
             Menu.DisplayGrid(player.guessGrid);
-            Console.WriteLine("\nYour grid\n");
+            Console.WriteLine("\n\t\t\t\tYour grid\n");
             Menu.DisplayGrid(player.grid);
 
         }
         public static void DisplayWinScreen(Player player, string winnerName)
         {
             Console.Clear();
-            Console.WriteLine(winnerName + " has won the game!");
-            Console.WriteLine("Opponent's grid\n");
+            Console.WriteLine("\t\t\t\t"+winnerName + " has won the game!");
+            Console.WriteLine("\t\t\t\tOpponent's grid\n");
             Menu.DisplayGrid(player.guessGrid);
-            Console.WriteLine("\nYour grid\n");
+            Console.WriteLine("\n\t\t\t\tYour grid\n");
             Menu.DisplayGrid(player.grid);
             Console.ReadLine();
         }

@@ -12,7 +12,9 @@ namespace Battleship_Project
         //Placing ships is likely going to be the hardest
         //part, so let's focus on the automated process
         //before moving on to validating user input.
-        
+
+        Tuple<bool, int[]> previousHit;
+
         public CPU()
         {
 
@@ -26,21 +28,27 @@ namespace Battleship_Project
             foreach (Ship ship in fleet)
             {
                 int xValue;
+                int height;
                 int yValue;
+                int width;
                 Random random = new Random();
                 bool vertical = false;
                 int angle = random.Next(0, 2);
                 if (angle == 0)
                 {
                     vertical = true;
-                    xValue = random.Next(0, grid.Height);
-                    yValue = random.Next(0, grid.Width - ship.Size.Length);
+                    height = grid.Height;
+                    xValue = random.Next(0, height);
+                    width = grid.Width - ship.Size.Length;
+                    yValue = random.Next(0, width);
                     ship.Move(grid, xValue, yValue, vertical);
                 }
                 else
                 {
-                    xValue = random.Next(0, grid.Height-ship.Size.Length);
-                    yValue = random.Next(0, grid.Width);
+                    height = grid.Height - ship.Size.Length;
+                    xValue = random.Next(0, height);
+                    width = grid.Width;
+                    yValue = random.Next(0, width);
                     ship.Move(grid, xValue, yValue, vertical);
                 }
             }
@@ -48,17 +56,80 @@ namespace Battleship_Project
 
         public override int[] Attack()
         {
-            Tuple<bool, int[]> validatedAttack;
-            do
+            previousHit = CheckForPreviousHits();
+            if (!previousHit.Item1)
             {
-                int[] loc = new int[2];
-                Random random = new Random();
-                int xValue = random.Next(0, grid.Height);
-                int yValue = random.Next(0, grid.Width);
-                validatedAttack = Menu.ValidateAttack(xValue, yValue, guessGrid);
+                Tuple<bool, int[]> validatedAttack;
+                do
+                {
+                    Random random = new Random();
+                    int height=grid.Height;
+                    int width=grid.Width;
+                    int xValue = random.Next(0, height);
+                    int yValue = random.Next(0, width);
+                    validatedAttack = Menu.ValidateAttack(xValue, yValue, guessGrid);
+                }
+                while (!validatedAttack.Item1);
+                return validatedAttack.Item2;
             }
-            while (!validatedAttack.Item1);
-            return validatedAttack.Item2;
+            else
+            {
+                Tuple<bool, int[]> validatedAttack;
+                do
+                {
+
+                    int xValue = previousHit.Item2[0];
+                    int yValue = previousHit.Item2[1];
+                    validatedAttack = Menu.ValidateAttack(xValue, yValue, guessGrid);
+                }
+                while (!validatedAttack.Item1);
+                return validatedAttack.Item2;
+            }
+        }
+        
+
+        public Tuple<bool,int[]> CheckForPreviousHits()
+        {
+            int[] loc = new int[2];
+            for (int i = 0;i<guessGrid.Height;i++)
+            {
+                for(int j = 0; j<guessGrid.Width;j++)
+                {
+                    string point = guessGrid[i, j];
+                    if(point=="X")
+                    {
+                        string pointToRight = guessGrid[i + 1, j];
+                        string pointToLeft = guessGrid[i - 1, j];
+                        string pointBelow = guessGrid[i, j-1];
+                        string pointAbove = guessGrid[i, j+1];
+                        if (pointToRight=="." && i < 19)
+                        {
+                            loc[0] = i + 1;
+                            loc[1] = j;
+                            return Tuple.Create(true, loc);
+                        }                       
+                        else if (pointToLeft == "." && i > 1)
+                        {
+                            loc[0] = i - 1;
+                            loc[1] = j;
+                            return Tuple.Create(true, loc);
+                        }                        
+                        else if (pointBelow == "." && j > 1)
+                        {
+                            loc[0] = i;
+                            loc[1] = j-1;
+                            return Tuple.Create(true, loc);
+                        }                      
+                        else if (pointAbove == "." && j < 19)
+                        {
+                            loc[0] = i;
+                            loc[1] = j+1;
+                            return Tuple.Create(true, loc);
+                        }
+                    }
+                }
+            }
+            return Tuple.Create(false, loc);
         }
 
     }  
