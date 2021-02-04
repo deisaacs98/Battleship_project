@@ -8,58 +8,62 @@ namespace BattleshipUnitTests
     public class CheckScoreMethodTest
     {
         [TestMethod]
-        public void CheckScore_CPU_true()
+        public void CheckScore_CPUvsCPU_true()
         {
             //Arrange
             Game game = new Game();
-            Player player = new CPU();
+            Player player1 = new CPU();
+            Player player2 = new CPU();
             bool expected = true;
             bool actual;
             //Act
-            player.hits = 14;
-            actual = game.CheckScore(player);
+            player1.hits = 14;
+            actual = game.CheckScore(player1, player2, "Player 1");
             //Assert
             Assert.AreEqual(expected, actual);
         }
         [TestMethod]
-        public void CheckScore_Human_true()
+        public void CheckScore_HumanVsHuman_true()
         {
             //Arrange
             Game game = new Game();
-            Player player = new Human();
+            Player player1 = new Human();
+            Player player2 = new Human();
             bool expected = true;
             bool actual;
             //Act
-            player.hits = 14;
-            actual = game.CheckScore(player);
+            player1.hits = 14;
+            actual = game.CheckScore(player1, player2, "Player 1");
             //Assert
             Assert.AreEqual(expected, actual);
         }
         [TestMethod]
-        public void CheckScore_CPU_false()
+        public void CheckScore_CPUvsHuman_false()
         {
             //Arrange
             Game game = new Game();
-            Player player = new CPU();
+            Player player1 = new CPU();
+            Player player2 = new Human();
             bool expected = false;
             bool actual;
             //Act
-            player.hits = 1;
-            actual = game.CheckScore(player);
+            player1.hits = 1;
+            actual = game.CheckScore(player1,player2,"CPU");
             //Assert
             Assert.AreEqual(expected, actual);
         }
         [TestMethod]
-        public void CheckScore_Human_false()
+        public void CheckScore_HumanVsHuman_false()
         {
             //Arrange
             Game game = new Game();
-            Player player = new Human();
+            Player player1 = new Human();
+            Player player2 = new Human();
             bool expected = true;
             bool actual;
             //Act
-            player.hits = 4;
-            actual = game.CheckScore(player);
+            player1.hits = 4;
+            actual = game.CheckScore(player1,player2,"Player 1");
             //Assert
             Assert.AreEqual(expected, actual);
         }

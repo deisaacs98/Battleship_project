@@ -65,8 +65,8 @@ namespace Battleship_Project
                     Random random = new Random();
                     int height=grid.Height;
                     int width=grid.Width;
-                    int xValue = random.Next(0, height);
-                    int yValue = random.Next(0, width);
+                    int xValue = random.Next(1, height+1);
+                    int yValue = random.Next(1, width+1);
                     validatedAttack = Menu.ValidateAttack(xValue, yValue, guessGrid);
                 }
                 while (!validatedAttack.Item1);

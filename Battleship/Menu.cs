@@ -129,7 +129,6 @@ namespace Battleship_Project
 
         public static int[] AttackPrompt(Grid grid, Grid guessGrid)
         {
-            
             Tuple<bool, int[]> validatedAttack;
             do
             {
@@ -139,7 +138,7 @@ namespace Battleship_Project
                 Console.WriteLine("\n\t\t\t\tYour grid\n");
                 Menu.DisplayGrid(grid);
                 Console.WriteLine("\n\n\t\t\t\tEnter the X coordinate for your attack:");
-                int number1; 
+                int number1;
                 Int32.TryParse(Console.ReadLine(),out number1);
                 Console.Clear();
                 Console.WriteLine("\t\t\t\tOpponent's grid\n");
@@ -149,6 +148,7 @@ namespace Battleship_Project
                 Console.WriteLine("\n\n\t\t\t\tEnter the Y coordinate for your attack:");
                 int number2;
                 Int32.TryParse(Console.ReadLine(), out number2);
+
                 validatedAttack = ValidateAttack(number2, number1,guessGrid);
             }
             while (!validatedAttack.Item1);
@@ -159,32 +159,39 @@ namespace Battleship_Project
         public static Tuple<bool, int[]> ValidatePlacement(int xValue, int yValue, Grid grid, bool vertical, Ship ship)
         {
             int[] loc = new int[2];
-            if (vertical)
+            while(xValue>=0 && xValue<grid.Height&&yValue>=0&&yValue<grid.Width)
             {
-                for (int i = 0; i < ship.Size.Length; i++)
+                if (vertical)
                 {
-                    if(grid[xValue+i, yValue] != ".")
+                    for (int i = 0; i < ship.Size.Length; i++)
                     {
-                        return Tuple.Create(false, loc);
+                        if (grid[xValue + i, yValue] != ".")
+                        {
+                            DisplayError("\t\t\t\tInvalid input");
+                            return Tuple.Create(false, loc);
+                        }
                     }
+                    loc[0] = xValue;
+                    loc[1] = yValue;
+                    return Tuple.Create(true, loc);
                 }
-                loc[0] = xValue;
-                loc[1] = yValue;
-                return Tuple.Create(true, loc);
-            }
-            else
-            {
-                for (int i = 0; i<ship.Size.Length;i++)
+                else
                 {
-                    if (grid[xValue, yValue+i] != ".")
+                    for (int i = 0; i < ship.Size.Length; i++)
                     {
-                        return Tuple.Create(false, loc);
+                        if (grid[xValue, yValue + i] != ".")
+                        {
+                            DisplayError("\t\t\t\tInvalid input");
+                            return Tuple.Create(false, loc);
+                        }
                     }
+                    loc[0] = xValue;
+                    loc[1] = yValue;
+                    return Tuple.Create(true, loc);
                 }
-                loc[0] = xValue;
-                loc[1] = yValue;
-                return Tuple.Create(true, loc);
             }
+            DisplayError("\t\t\t\tInvalid input");
+            return Tuple.Create(false, loc);
         }
 
         public static Tuple<bool, int[]> ValidateAttack(int xValue, int yValue, Grid grid)
