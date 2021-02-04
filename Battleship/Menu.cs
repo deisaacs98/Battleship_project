@@ -24,7 +24,6 @@ namespace Battleship_Project
             Console.WriteLine(error);
             Console.ReadLine();
             Console.Clear();
-
         }
 
         public static Tuple<bool, int> Validate1Or2(int input)
@@ -118,21 +117,6 @@ namespace Battleship_Project
                 Console.Write("\n");
             }
         }
-        //public static void DisplayFleet(Player player)
-        //{
-        //    foreach (Ship ship in player.fleet)
-        //    {
-        //        Console.WriteLine(ship.Name + "\t\t");
-        //        for (int i = 0; i < ship.Size.Length; i++)
-        //        {
-        //            Console.Write(ship.Size[i]);
-        //        }
-        //    }
-        //}
-
-
-
-        
 
         public static int[] AttackPrompt(Grid grid, Grid guessGrid)
         {
@@ -205,6 +189,47 @@ namespace Battleship_Project
                 DisplayError("Invalid input");
                 return Tuple.Create(false, loc);
             }
+        }
+        
+        public static void DisplayHit(Player player)
+        {
+            Console.Clear();
+            Console.WriteLine("You hit a ship!");
+            Console.WriteLine("Opponent's grid\n");
+            Menu.DisplayGrid(player.guessGrid);
+            Console.WriteLine("\nYour grid\n");
+            Menu.DisplayGrid(player.grid);
+
+        }
+        public static void DisplayMiss(Player player)
+        {
+            Console.Clear();
+            Console.WriteLine("You missed!");
+            Console.WriteLine("Opponent's grid\n");
+            Menu.DisplayGrid(player.guessGrid);
+            Console.WriteLine("\nYour grid\n");
+            Menu.DisplayGrid(player.grid);
+
+        }
+        public static void DisplayHitSameSpot(Player player)
+        {
+            Console.Clear();
+            Console.WriteLine("You alrady hit this spot!");
+            Console.WriteLine("Opponent's grid\n");
+            Menu.DisplayGrid(player.guessGrid);
+            Console.WriteLine("\nYour grid\n");
+            Menu.DisplayGrid(player.grid);
+
+        }
+        public static void DisplayWinScreen(Player player, string winnerName)
+        {
+            Console.Clear();
+            Console.WriteLine(winnerName + " has won the game!");
+            Console.WriteLine("Opponent's grid\n");
+            Menu.DisplayGrid(player.guessGrid);
+            Console.WriteLine("\nYour grid\n");
+            Menu.DisplayGrid(player.grid);
+            Console.ReadLine();
         }
     }
 

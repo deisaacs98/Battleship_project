@@ -43,12 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aircraft Carrier.cs" />
-    <Compile Include="Battleship.cs" />
+    <Compile Include="Ship Classes\Aircraft Carrier.cs" />
+    <Compile Include="Ship Classes\Battleship.cs" />
     <Compile Include="Fleet.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="CPU.cs" />
-    <Compile Include="Destroyer.cs" />
+    <Compile Include="Ship Classes\Destroyer.cs" />
     <Compile Include="Grid.cs" />
     <Compile Include="Human.cs" />
     <Compile Include="IMoveable.cs" />
@@ -57,7 +57,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ship.cs" />
-    <Compile Include="Submarine.cs" />
+    <Compile Include="Ship Classes\Submarine.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

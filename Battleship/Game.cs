@@ -12,8 +12,6 @@ namespace Battleship_Project
         public Player player1;
         public Player player2;
 
-        
-
         public Game()
         {
 
@@ -50,10 +48,10 @@ namespace Battleship_Project
             {
                 loc=player1.Attack();
                 CheckIfHit(loc,player2, player1);
-                playGame = CheckScore(player2);
+                playGame = CheckScore(player2, player1, "Player 1");
                 loc=player2.Attack();
                 CheckIfHit(loc,player1, player2);
-                playGame = CheckScore(player1);
+                playGame = CheckScore(player1, player2, "Player 2");
             }
 
         }
@@ -66,33 +64,33 @@ namespace Battleship_Project
                 //HIT
                 player2.guessGrid[xValue-1, yValue-1] = "X";
                 player1.grid[xValue-1, yValue-1] = "X";
-                Console.WriteLine("You hit a ship!");
+                Menu.DisplayHit(player2);
                 player2.hits++;
                 
             }
             else if(player1.grid[xValue-1,yValue-1]==".")
             {
                 player2.guessGrid[xValue-1, yValue-1] = "O";
-                Console.WriteLine("You missed.");
+                Menu.DisplayMiss(player2);
             }
             else
             {
-                Console.WriteLine("You already hit this spot!");
+                Menu.DisplayHitSameSpot(player2);
             }
-            Console.WriteLine("Press Enter to end your turn");
+            Console.WriteLine("\nPress Enter to end your turn");
             Console.ReadLine();
         }
-        public bool CheckScore(Player player)
+        public bool CheckScore(Player player1, Player player2, string winnerName)
         {
             int totalSize=0;
-            foreach(Ship ship in player.fleet)
+            foreach(Ship ship in player1.fleet)
             {
                 totalSize += ship.Size.Length;
             }
-            if(player.hits>=totalSize)
+            if(player1.hits>=totalSize)
             {
-                Console.WriteLine(player+" has won the game!");
-                Console.ReadLine();
+                Menu.DisplayWinScreen(player2, winnerName);
+                
                 return false;
             }
             else
