@@ -50,7 +50,5 @@ namespace Battleship_Project
             get
             { return height; }
         }
-
-
     }
 }

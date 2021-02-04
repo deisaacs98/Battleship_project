@@ -76,7 +76,7 @@ namespace Battleship_Project
                 if(isHuman)
                 {
                     Menu.DisplayHit(player2);
-                    Console.WriteLine("\nPress Enter to end your turn");
+                    Console.WriteLine("\n\n\t\t\t\tPress Enter to end your turn");
                     Console.ReadLine();
                 }
                 player2.hits++;   
@@ -88,7 +88,7 @@ namespace Battleship_Project
                 if (isHuman)
                 {
                     Menu.DisplayMiss(player2);
-                    Console.WriteLine("\nPress Enter to end your turn");
+                    Console.WriteLine("\n\n\t\t\t\tPress Enter to end your turn");
                     Console.ReadLine();
                 }
             }
@@ -97,7 +97,7 @@ namespace Battleship_Project
                 if (isHuman)
                 {
                     Menu.DisplayHitSameSpot(player2);
-                    Console.WriteLine("\nPress Enter to end your turn");
+                    Console.WriteLine("\n\n\t\t\t\tPress Enter to end your turn");
                     Console.ReadLine();
                 }        
             }
@@ -105,6 +105,7 @@ namespace Battleship_Project
         }
         public bool CheckScore(Player player1, Player player2, string winnerName)
         {
+            bool playAgain = false;
             int totalSize=0;
             foreach(Ship ship in player1.fleet)
             {
@@ -112,9 +113,9 @@ namespace Battleship_Project
             }
             if(player1.hits>=totalSize)
             {
-                Menu.DisplayWinScreen(player2, winnerName);
+                playAgain = Menu.DisplayWinScreen(player2, winnerName);
                 
-                return false;
+                return playAgain;
             }
             else
             {

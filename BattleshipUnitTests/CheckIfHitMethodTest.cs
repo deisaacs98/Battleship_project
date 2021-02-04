@@ -22,7 +22,7 @@ namespace BattleshipUnitTests
             int actual;
             //Act
             player2.hits = 0;
-            game.CheckIfHit(loc,player1,player2);
+            game.CheckIfHit(loc,player1,player2,true);
             actual = player2.hits;
             //Assert
             Assert.AreEqual(expected, actual);
@@ -43,7 +43,7 @@ namespace BattleshipUnitTests
             int actual;
             //Act
             player1.hits = 9;
-            game.CheckIfHit(loc, player2, player1);
+            game.CheckIfHit(loc, player2, player1,false);
             actual = player1.hits;
             //Assert
             Assert.AreEqual(expected, actual);
@@ -63,7 +63,7 @@ namespace BattleshipUnitTests
             int actual;
             //Act
             player1.hits = 9;
-            game.CheckIfHit(loc, player2, player1);
+            game.CheckIfHit(loc, player2, player1,false);
             actual = player1.hits;
             //Assert
             Assert.AreEqual(expected, actual);

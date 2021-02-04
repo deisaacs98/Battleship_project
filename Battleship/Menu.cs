@@ -12,16 +12,16 @@ namespace Battleship_Project
         public static void Title()
         {
             Console.SetWindowSize(120, 63);
-            Console.BackgroundColor = ConsoleColor.Blue;
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.ForegroundColor = ConsoleColor.White;
             Console.Clear();
-            Console.WriteLine("\n\t\t   ______  __  _____  _____  _     ____    _____  _  _  ____ ");
-            Console.Write("\n\t\t  |  /  /|/  ||_   _||_   _|| |   |  _|   / ___/ | || || -  |");
+            Console.WriteLine("\n\n\n\n\n\n\t\t   ______  __  _____  _____  _     ____    _____  _  _  ____ ");
+            Console.Write("\t\t  |  /  / /  ||_   _||_   _|| |   |  _|   / ___/ | || || -  |");
             Console.Write("\n\t\t  |   _/_/ / |  | |    | |  | |   |   |  / /_| |_| || ||  _/ ");
             Console.Write("\n\t\t  |     /    |  | |    | |  | |   |  _| /__  /  _  || || | ");
             Console.Write("\n\t\t  |  / /  /| |  | |    | |  | |__ |   |___/ /| | | || || |");
             Console.Write("\n\t\t  |___/__/ |_|  |_|    |_|  |____||___|____/ |_| |_||_||_|");
-            Console.WriteLine("\n\n\n\t\t\t\tPress Enter to Continue");
+            Console.WriteLine("\n\n\n\n\n\t\t\t\tPress Enter to Continue");
             Console.ReadLine();
         }
 
@@ -55,9 +55,9 @@ namespace Battleship_Project
             do
             {
                 Console.Clear();
-                Console.WriteLine("How many players?");
-                Console.WriteLine("1 Player");
-                Console.WriteLine("2 Player");
+                Console.WriteLine("\n\n\n\n\n\n\n\t\t\t\tHow many players?");
+                Console.WriteLine("\n\t\t\t\t1 Player");
+                Console.WriteLine("\t\t\t\t2 Player");
                 int input;
                 Int32.TryParse(Console.ReadLine(), out input);
                 validatedInput = Validate1Or2(input);
@@ -69,7 +69,7 @@ namespace Battleship_Project
         {
             Console.Clear();
             DisplayGrid(grid);
-            Console.WriteLine("Place your "+ship);
+            Console.WriteLine("\n\n\t\t\t\tPlace your "+ship.Name);
             int angle = ChooseAngle();
             bool vertical = false;
             if(angle ==2)
@@ -79,11 +79,14 @@ namespace Battleship_Project
             Tuple<bool, int[]> validatedPlacement;
             do
             {
-                    
-                Console.WriteLine("Enter the X coordinate:");
+                Console.Clear();
+                DisplayGrid(grid);
+                Console.WriteLine("\n\t\t\t\tEnter the X coordinate:");
                 int number1;
                 Int32.TryParse(Console.ReadLine(), out number1);
-                Console.WriteLine("Enter the Y coordinate:");
+                Console.Clear();
+                DisplayGrid(grid);
+                Console.WriteLine("\n\t\t\t\tEnter the Y coordinate:");
                 int number2;
                 Int32.TryParse(Console.ReadLine(), out number2);
                 validatedPlacement = ValidatePlacement(number2-1, number1-1, grid, vertical, ship);
@@ -99,8 +102,8 @@ namespace Battleship_Project
             Tuple<bool, int> validatedInput;
             do
             {
-                Console.WriteLine("\nEnter 1 to place the ship horizontally");
-                Console.WriteLine("Enter 2 to place the ship vertically");
+                Console.WriteLine("\n\n\t\t\t\tEnter 1 to place the ship horizontally");
+                Console.WriteLine("\n\t\t\t\tEnter 2 to place the ship vertically");
                 int input;
                 Int32.TryParse(Console.ReadLine(), out input);
                 validatedInput = Validate1Or2(input);
@@ -111,11 +114,11 @@ namespace Battleship_Project
         }
         public static void DisplayGrid(Grid grid)
         {
-            Console.WriteLine("\t\t\t   1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20");
+            Console.WriteLine("\n\n\t\t\t   1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20");
             for(int i=0;i<grid.Height;i++)
             {
                 string yValue = Convert.ToString(i+1);
-                Console.Write(\t\t\tyValue.PadRight(3));
+                Console.Write("\t\t\t"+yValue.PadRight(3));
                 for(int j=0;j<grid.Width;j++)
                 {
                     Console.Write(grid[i, j]+"  ");
@@ -135,10 +138,15 @@ namespace Battleship_Project
                 Menu.DisplayGrid(guessGrid);
                 Console.WriteLine("\n\t\t\t\tYour grid\n");
                 Menu.DisplayGrid(grid);
-                Console.WriteLine("\t\t\t\tEnter the X coordinate for your attack:");
+                Console.WriteLine("\n\n\t\t\t\tEnter the X coordinate for your attack:");
                 int number1; 
                 Int32.TryParse(Console.ReadLine(),out number1);
-                Console.WriteLine("\t\t\t\tEnter the Y coordinate for your attack:");
+                Console.Clear();
+                Console.WriteLine("\t\t\t\tOpponent's grid\n");
+                Menu.DisplayGrid(guessGrid);
+                Console.WriteLine("\n\t\t\t\tYour grid\n");
+                Menu.DisplayGrid(grid);
+                Console.WriteLine("\n\n\t\t\t\tEnter the Y coordinate for your attack:");
                 int number2;
                 Int32.TryParse(Console.ReadLine(), out number2);
                 validatedAttack = ValidateAttack(number2, number1,guessGrid);
@@ -227,15 +235,19 @@ namespace Battleship_Project
             Menu.DisplayGrid(player.grid);
 
         }
-        public static void DisplayWinScreen(Player player, string winnerName)
+        public static bool DisplayWinScreen(Player player, string winnerName)
         {
+            bool playAgain = false;
             Console.Clear();
             Console.WriteLine("\t\t\t\t"+winnerName + " has won the game!");
-            Console.WriteLine("\t\t\t\tOpponent's grid\n");
-            Menu.DisplayGrid(player.guessGrid);
-            Console.WriteLine("\n\t\t\t\tYour grid\n");
-            Menu.DisplayGrid(player.grid);
-            Console.ReadLine();
+            Console.WriteLine("\n\n\t\t\t\tWould you like to play again?");
+            Console.WriteLine("\n\t\t\t\t(Press Y for Yes or N for No)");
+            string response = Console.ReadLine();
+            if(response=="Y"||response=="y")
+            {
+                playAgain = true;
+            }
+            return playAgain;
         }
     }
 
