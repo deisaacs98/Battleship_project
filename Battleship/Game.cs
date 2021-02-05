@@ -84,7 +84,6 @@ namespace Battleship_Project
             else if(player1.grid[xValue-1,yValue-1]==".")
             {
                 player2.guessGrid[xValue-1, yValue-1] = "O";
-                player1.grid[xValue - 1, yValue - 1] = "O";
                 if (isHuman)
                 {
                     Menu.DisplayMiss(player2);

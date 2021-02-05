@@ -11,7 +11,7 @@ namespace Battleship_Project
     {
         public static void Title()
         {
-            Console.SetWindowSize(120, 63);
+            Console.SetWindowSize(120, 43);
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.ForegroundColor = ConsoleColor.White;
             Console.Clear();
@@ -32,22 +32,7 @@ namespace Battleship_Project
             Console.Clear();
         }
 
-        public static Tuple<bool, int> Validate1Or2(int input)
-        {
-            if(input == 1)
-            {
-                return Tuple.Create(true, 1);
-            }
-            else if(input == 2)
-            {
-                return Tuple.Create(true, 2);
-            }
-            else
-            {
-                DisplayError("Invalid input");
-                return Tuple.Create(false, 0);
-            }
-        }
+
 
         public static int HowManyPlayers()
         {
@@ -65,14 +50,62 @@ namespace Battleship_Project
             while (!validatedInput.Item1);
             return validatedInput.Item2;
         }
-        public static void PlaceShipPrompt(Ship ship,Grid grid)
+
+        public static Tuple<bool, int> Validate1Or2(int input)
+        {
+            if (input == 1)
+            {
+                return Tuple.Create(true, 1);
+            }
+            else if (input == 2)
+            {
+                return Tuple.Create(true, 2);
+            }
+            else
+            {
+                DisplayError("Invalid input");
+                return Tuple.Create(false, 0);
+            }
+        }
+
+
+        public static void DisplayGrid(Grid grid)
+        {
+            Console.WriteLine("\n\n\t\t\t   1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20");
+            for(int i=0;i<grid.Height;i++)
+            {
+                string yValue = Convert.ToString(i+1);
+                Console.Write("\t\t\t"+yValue.PadRight(3));
+                for(int j=0;j<grid.Width;j++)
+                {
+                    Console.Write(grid[i, j]+"  ");
+                }
+                Console.Write("\n");
+            }
+        }
+        public static int ChooseAngle()
+        {
+            Tuple<bool, int> validatedInput;
+            do
+            {
+                Console.WriteLine("\n\n\t\t\t\tEnter 1 to place the ship horizontally");
+                Console.WriteLine("\n\t\t\t\tEnter 2 to place the ship vertically");
+                int input;
+                Int32.TryParse(Console.ReadLine(), out input);
+                validatedInput = Validate1Or2(input);
+            }
+            while (!validatedInput.Item1);
+            return validatedInput.Item2;
+
+        }
+        public static void PlaceShipPrompt(Ship ship, Grid grid)
         {
             Console.Clear();
             DisplayGrid(grid);
-            Console.WriteLine("\n\n\t\t\t\tPlace your "+ship.Name);
+            Console.WriteLine("\n\n\t\t\t\tPlace your " + ship.Name);
             int angle = ChooseAngle();
             bool vertical = false;
-            if(angle ==2)
+            if (angle == 2)
             {
                 vertical = true;
             }
@@ -89,42 +122,65 @@ namespace Battleship_Project
                 Console.WriteLine("\n\t\t\t\tEnter the Y coordinate:");
                 int number2;
                 Int32.TryParse(Console.ReadLine(), out number2);
-                validatedPlacement = ValidatePlacement(number2-1, number1-1, grid, vertical, ship);
+                number1--;
+                number2--;
+                validatedPlacement = ValidatePlacement(number2 , number1 , grid, vertical, ship);
             }
             while (!validatedPlacement.Item1);
             ship.Move(grid, validatedPlacement.Item2[0], validatedPlacement.Item2[1], vertical);
         }
-            
-        
 
-        public static int ChooseAngle()
-        {
-            Tuple<bool, int> validatedInput;
-            do
-            {
-                Console.WriteLine("\n\n\t\t\t\tEnter 1 to place the ship horizontally");
-                Console.WriteLine("\n\t\t\t\tEnter 2 to place the ship vertically");
-                int input;
-                Int32.TryParse(Console.ReadLine(), out input);
-                validatedInput = Validate1Or2(input);
-            }
-            while (!validatedInput.Item1);
-            return validatedInput.Item2;
 
-        }
-        public static void DisplayGrid(Grid grid)
+        public static Tuple<bool, int[]> ValidatePlacement(int xValue, int yValue, Grid grid, bool vertical, Ship ship)
         {
-            Console.WriteLine("\n\n\t\t\t   1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20");
-            for(int i=0;i<grid.Height;i++)
+            int[] loc = new int[2];
+            while (xValue >= 0 && xValue < grid.Height && yValue >= 0 && yValue < grid.Width)
             {
-                string yValue = Convert.ToString(i+1);
-                Console.Write("\t\t\t"+yValue.PadRight(3));
-                for(int j=0;j<grid.Width;j++)
+                if (vertical)
                 {
-                    Console.Write(grid[i, j]+"  ");
+                    for (int i = 0; i < ship.Size.Length; i++)
+                    {
+                        int tempX = xValue + i;
+                        if(tempX>=grid.Height)
+                        {
+                            DisplayError("\t\t\t\tInvalid input");
+                            return Tuple.Create(false, loc);
+                        }
+                        else if (grid[tempX, yValue] != ".")
+                        {
+                            DisplayError("\t\t\t\tInvalid input");
+                            return Tuple.Create(false, loc);
+                        }
+
+                    }
+                    loc[0] = xValue;
+                    loc[1] = yValue;
+                    return Tuple.Create(true, loc);
                 }
-                Console.Write("\n");
+                else
+                {
+                    for (int i = 0; i < ship.Size.Length; i++)
+                    {
+                        int tempY = yValue + i;
+                        if(tempY>=grid.Width)
+                        {
+                            DisplayError("\t\t\t\tInvalid input");
+                            return Tuple.Create(false, loc);
+                        }
+                        else if (grid[xValue, tempY] != ".")
+                        {
+                            DisplayError("\t\t\t\tInvalid input");
+                            return Tuple.Create(false, loc);
+                        }
+
+                    }
+                    loc[0] = xValue;
+                    loc[1] = yValue;
+                    return Tuple.Create(true, loc);
+                }
             }
+            DisplayError("\t\t\t\tInvalid input");
+            return Tuple.Create(false, loc);
         }
 
         public static int[] AttackPrompt(Grid grid, Grid guessGrid)
@@ -156,48 +212,10 @@ namespace Battleship_Project
 
         }
 
-        public static Tuple<bool, int[]> ValidatePlacement(int xValue, int yValue, Grid grid, bool vertical, Ship ship)
-        {
-            int[] loc = new int[2];
-            while(xValue>=0 && xValue<grid.Height&&yValue>=0&&yValue<grid.Width)
-            {
-                if (vertical)
-                {
-                    for (int i = 0; i < ship.Size.Length; i++)
-                    {
-                        if (grid[xValue + i, yValue] != ".")
-                        {
-                            DisplayError("\t\t\t\tInvalid input");
-                            return Tuple.Create(false, loc);
-                        }
-                    }
-                    loc[0] = xValue;
-                    loc[1] = yValue;
-                    return Tuple.Create(true, loc);
-                }
-                else
-                {
-                    for (int i = 0; i < ship.Size.Length; i++)
-                    {
-                        if (grid[xValue, yValue + i] != ".")
-                        {
-                            DisplayError("\t\t\t\tInvalid input");
-                            return Tuple.Create(false, loc);
-                        }
-                    }
-                    loc[0] = xValue;
-                    loc[1] = yValue;
-                    return Tuple.Create(true, loc);
-                }
-            }
-            DisplayError("\t\t\t\tInvalid input");
-            return Tuple.Create(false, loc);
-        }
-
         public static Tuple<bool, int[]> ValidateAttack(int xValue, int yValue, Grid grid)
         {
             int[] loc = new int[2];
-            if (xValue<=grid.Height&&yValue<=grid.Width)
+            if (xValue<=grid.Height&&yValue<=grid.Width&&xValue>0&&yValue>0)
             {
                 loc[0] = xValue;
                 loc[1] = yValue;

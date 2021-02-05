@@ -98,39 +98,51 @@ namespace Battleship_Project
                     string point = guessGrid[i, j];
                     if(point=="X")
                     {
-                        string pointToRight = guessGrid[i + 1, j];
-                        string pointToLeft = guessGrid[i - 1, j];
-                        string pointBelow = guessGrid[i, j-1];
-                        string pointAbove = guessGrid[i, j+1];
-                        if (pointToRight=="." && i < 19)
+                        if (i < 19)
                         {
-                            loc[0] = i + 1;
-                            loc[1] = j;
-                            return Tuple.Create(true, loc);
+                            string pointToRight = guessGrid[i + 1, j];
+                            if (pointToRight == ".")
+                            {
+                                loc[0] = i + 1;
+                                loc[1] = j;
+                                return Tuple.Create(true, loc);
+                            }
                         }                       
-                        else if (pointToLeft == "." && i > 1)
+                        else if ( i > 1)
                         {
-                            loc[0] = i - 1;
-                            loc[1] = j;
-                            return Tuple.Create(true, loc);
+                            string pointToLeft = guessGrid[i - 1, j];
+                            if (pointToLeft == ".")
+                            {
+                                loc[0] = i - 1;
+                                loc[1] = j;
+                                return Tuple.Create(true, loc);
+                            }
                         }                        
-                        else if (pointBelow == "." && j > 1)
+                        else if (j > 1)
                         {
-                            loc[0] = i;
-                            loc[1] = j-1;
-                            return Tuple.Create(true, loc);
+                            string pointBelow = guessGrid[i, j - 1];
+                            if (pointBelow == ".")
+                            {
+                                loc[0] = i;
+                                loc[1] = j - 1;
+                                return Tuple.Create(true, loc);
+                            }
+                            
                         }                      
-                        else if (pointAbove == "." && j < 19)
+                        else if (j < 19)
                         {
-                            loc[0] = i;
-                            loc[1] = j+1;
-                            return Tuple.Create(true, loc);
+                            string pointAbove = guessGrid[i, j + 1];
+                            if (pointAbove == ".")
+                            {
+                                loc[0] = i;
+                                loc[1] = j + 1;
+                                return Tuple.Create(true, loc);
+                            }
                         }
                     }
                 }
             }
             return Tuple.Create(false, loc);
         }
-
     }  
 }
